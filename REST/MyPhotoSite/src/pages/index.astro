@@ -1,4 +1,7 @@
 ---
+export const prerender = false;
+
+const loggedIn = Astro.cookies.get('gp_token');
 
 ---
 
@@ -12,5 +15,15 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+		<p>
+			{loggedIn ? (
+				<span>
+					You are logged in. <a href="/logout">Log out</a>
+				</span>
+			) : (
+				<span>
+					You are not logged in. <a href="/login">Log in</a>
+				</span>
+			)}
 	</body>
 </html>

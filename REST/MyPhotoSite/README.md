@@ -1,47 +1,35 @@
-# Astro Starter Kit: Minimal
+# How to
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Follow the [Get Started guide](https://developers.google.com/photos/library/guides/get-started).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Make sure to add `Authorized JavaScript origins`:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+    http://localhost:4321
+    https://something-something.vercel.app
 
-## 🚀 Project Structure
+And in `Authorized redirect URI`:
 
-Inside of your Astro project, you'll see the following folders and files:
+    http://localhost:4321/auth/google/callback
+    https://something-something.vercel.app/auth/google/callback
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Then go and download your credentials https://console.cloud.google.com/apis/credentials
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Make sure that your project is linked to Vercel.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+    vercel link
 
-Any static assets, like images, can be placed in the `public/` directory.
+Now save that file in vercel environment variables:
 
-## 🧞 Commands
+    vercel env add GOOGLE_KEYS_JSON
 
-All commands are run from the root of the project, from a terminal:
+Or
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+    cat client_secret_*.apps.googleusercontent.com.json | vercel env add GOOGLE_KEYS_JSON production
 
-## 👀 Want to learn more?
+Pull JSON secrets from Vercel to `.env` file:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+    vercel env pull
+
+Restart your server:
+
+    pnpm run dev
