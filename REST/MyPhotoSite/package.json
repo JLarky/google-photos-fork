@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "fmt": "bunx @biomejs/biome format . --write",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -11,5 +12,8 @@
   },
   "dependencies": {
     "astro": "^4.0.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.4.1"
   }
 }
