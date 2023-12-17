@@ -55,7 +55,7 @@ export async function* libraryApiGetAlbums(authToken: string) {
 
 				counter += items.length;
 
-				yield items;
+				yield {items};
 			}
 			if (result.nextPageToken) {
 				parameters.set("pageToken", result.nextPageToken);
@@ -73,7 +73,7 @@ export async function* libraryApiGetAlbums(authToken: string) {
 	}
 
 	logger.info("Albums loaded.");
-	if (error) throw error;
+	if (error) yield {error};
 }
 
 // Return the body as JSON if the request was successful, or thrown a StatusError.
@@ -96,10 +96,11 @@ async function checkStatus<T>(response: Response): Promise<T> {
 
 // Custom error that contains a status, title and a server message.
 class StatusError extends Error {
-	constructor(status, title, serverMessage, ...params) {
-		super(...params);
-		this.status = status;
-		this.statusTitle = title;
-		this.serverMessage = serverMessage;
+	constructor(status: number, title: string, serverMessage: string, ...params: undefined[]) {
+		super(`[${status}] ${title}. ${JSON.stringify(serverMessage)}`, ...params);
+		const that = this as any
+		that.status = status;
+		that.statusTitle = title;
+		that.serverMessage = serverMessage;
 	}
 }

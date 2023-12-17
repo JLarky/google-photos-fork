@@ -16,12 +16,18 @@ const albumsGenerator = libraryApiGetAlbums(accessToken);
   {
     async function* () {
       for await (const albumChunk of albumsGenerator) {
-        for (const album of albumChunk) {
-          yield (
-            <li>
-              <a href={album.productUrl}>{album.title || "<untitled>"}</a>
-            </li>
-          );
+        if (albumChunk.error) {
+          yield <li>{albumChunk.error}</li>;
+          continue;
+        }
+        if (albumChunk.items) {
+          for (const album of albumChunk.items) {
+            yield (
+              <li>
+                <a href={album.productUrl}>{album.title || "<untitled>"}</a>
+              </li>
+            );
+          }
         }
       }
     }
