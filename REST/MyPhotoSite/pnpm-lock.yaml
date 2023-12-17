@@ -11,12 +11,18 @@ dependencies:
   '@astrojs/vercel':
     specifier: ^6.0.1
     version: 6.0.1(astro@4.0.3)
+  '@fancyapps/fancybox':
+    specifier: ^3.5.7
+    version: 3.5.7(jquery@3.7.1)
   astro:
     specifier: ^4.0.3
     version: 4.0.3(typescript@5.3.3)
   google-auth-library:
     specifier: 9.4.1
     version: 9.4.1
+  jquery:
+    specifier: ^3.7.1
+    version: 3.7.1
   material-design-lite:
     specifier: 1.3.0
     version: 1.3.0
@@ -670,6 +676,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fancyapps/fancybox@3.5.7(jquery@3.7.1):
+    resolution: {integrity: sha512-rcEtu8t+WnmqIDV/Wfm1yvy/nDdwc7YV25j9HLxGC2/WOsUhk9rcWg2nB8g1BrjRt9zaoADdjHTU6ILYTJzBBg==}
+    peerDependencies:
+      jquery: '>=1.9.0'
+    dependencies:
+      jquery: 3.7.1
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
@@ -2254,6 +2268,10 @@ packages:
 
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /jquery@3.7.1:
+    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
     dev: false
 
   /js-tokens@4.0.0:
