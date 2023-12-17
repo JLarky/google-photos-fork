@@ -1,5 +1,7 @@
 # How to
 
+## Create oauth2 credentials
+
 Follow the [Get Started guide](https://developers.google.com/photos/library/guides/get-started).
 
 Make sure to add `Authorized JavaScript origins`:
@@ -25,6 +27,18 @@ Now save that file in vercel environment variables:
 Or
 
     cat client_secret_*.apps.googleusercontent.com.json | vercel env add GOOGLE_KEYS_JSON production
+
+## Create session cookie encryption key
+
+Second, create session encryption key:
+
+    node scripts/generate-key.mjs
+
+Save it in vercel environment variables:
+
+    vercel env add PASETO_SECRET_KEY
+
+## Create a `.env` file
 
 Pull JSON secrets from Vercel to `.env` file:
 

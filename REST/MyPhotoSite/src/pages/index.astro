@@ -3,25 +3,15 @@ import Layout from "../ui/Layout.astro";
 import Dialog from "../ui/Dialog.astro";
 import jQuery from "jquery/dist/jquery.min.js?url";
 import fancybox from "@fancyapps/fancybox/dist/jquery.fancybox.min.js?url";
-
+import { parseSession } from "../session";
 
 export const prerender = false;
 
-let name = "-";
-let avatarUrl = "";
+const token = Astro.cookies.get("gp_token");
+const session = await parseSession(token?.value);
 
-// res.locals.name = '-';
-//   if (req.user && req.user.profile && req.user.profile.name) {
-//     res.locals.name =
-//         req.user.profile.name.givenName || req.user.profile.displayName;
-//   }
-
-//   res.locals.avatarUrl = '';
-//   if (req.user && req.user.profile && req.user.profile.photos) {
-//     res.locals.avatarUrl = req.user.profile.photos[0].value;
-//   }
-
-
+const name = session?.profile.name || "-";
+const avatarUrl = session?.profile.avatarUrl || "";
 ---
 <Layout avatarUrl={avatarUrl} name={name}>
     <section class="sample-content">

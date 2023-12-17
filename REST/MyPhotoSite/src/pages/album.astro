@@ -2,11 +2,16 @@
 import Layout from "../ui/Layout.astro";
 import Dialog from "../ui/Dialog.astro";
 import jQuery from "jquery/dist/jquery.min.js?url";
+import { parseSession } from "../session";
 
 export const prerender = false;
 
-let name = "-";
-let avatarUrl = "";
+const token = Astro.cookies.get("gp_token");
+const session = await parseSession(token?.value);
+
+const name = session?.profile.name || "-";
+const avatarUrl = session?.profile.avatarUrl || "";
+
 ---
 
 <Layout avatarUrl={avatarUrl} name={name}>

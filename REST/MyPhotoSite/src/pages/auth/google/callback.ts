@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
+import paseto from "paseto";
 import { getOAuth2Client } from "../../../oauth";
+import { secretKey } from "../../../config";
 
 export const prerender = false;
 
@@ -15,11 +17,12 @@ export const GET: APIRoute = async ({ url }) => {
 	// Make sure to set the credentials on the OAuth2 client.
 	oAuth2Client.setCredentials(r.tokens);
 
+	const gp_token = await paseto.V3.encrypt(r.tokens, secretKey, { expiresIn: "1h" });
 	return new Response(null, {
 		status: 302,
 		headers: {
 			Location: "/",
-			"Set-Cookie": `gp_token=${r.tokens.access_token}; Path=/; HttpOnly; Secure`,
+			"Set-Cookie": `gp_token=${gp_token}; Path=/; HttpOnly; Secure`,
 		},
 	});
 };

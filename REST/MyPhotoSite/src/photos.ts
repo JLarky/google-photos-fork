@@ -55,7 +55,7 @@ export async function* libraryApiGetAlbums(authToken: string) {
 
 				counter += items.length;
 
-				yield {items};
+				yield {albums: items};
 			}
 			if (result.nextPageToken) {
 				parameters.set("pageToken", result.nextPageToken);

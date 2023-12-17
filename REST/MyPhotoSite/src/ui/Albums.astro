@@ -1,10 +1,14 @@
 ---
 import { libraryApiGetAlbums } from "../photos";
 
+export type Props = {
+  accessToken: string;
+};
+
 export const prerender = false;
 
-const tokenCookie = Astro.cookies.get("gp_token");
-const accessToken = tokenCookie?.value;
+const { accessToken } = Astro.props;
+
 if (!accessToken) {
   return null;
 }
@@ -20,8 +24,8 @@ const albumsGenerator = libraryApiGetAlbums(accessToken);
           yield <li>{albumChunk.error}</li>;
           continue;
         }
-        if (albumChunk.items) {
-          for (const album of albumChunk.items) {
+        if (albumChunk.albums) {
+          for (const album of albumChunk.albums) {
             yield (
               <li>
                 <a href={album.productUrl}>{album.title || "<untitled>"}</a>

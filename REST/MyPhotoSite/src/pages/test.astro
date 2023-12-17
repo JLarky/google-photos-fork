@@ -1,8 +1,13 @@
 ---
 import Albums from "../ui/Albums.astro";
+import { parseSession } from "../session";
+
+export const prerender = false;
 
 const loggedIn = Astro.cookies.get("gp_token");
-export const prerender = false;
+const session = await parseSession(loggedIn?.value);
+
+const accessToken = session?.sessionToken.access_token
 ---
 
 <html lang="en">
@@ -17,10 +22,10 @@ export const prerender = false;
     <h1>Astro</h1>
     <p>
       {
-        loggedIn ? (
+        accessToken ? (
           <span>
             You are logged in. <a href="/logout">Log out</a>
-            <Albums />
+            <Albums accessToken={accessToken} />
           </span>
         ) : (
           <span>
