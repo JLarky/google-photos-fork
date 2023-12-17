@@ -2,6 +2,7 @@
 import Albums from "../ui/Albums.astro";
 
 const loggedIn = Astro.cookies.get("gp_token");
+export const prerender = false;
 ---
 
 <html lang="en">
