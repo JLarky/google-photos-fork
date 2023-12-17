@@ -1,0 +1,28 @@
+---
+import Layout from "../ui/Layout.astro";
+import Dialog from "../ui/Dialog.astro";
+import jQuery from "jquery/dist/jquery.min.js?url";
+
+export const prerender = false;
+
+let name = "-";
+let avatarUrl = "";
+---
+
+<Layout avatarUrl={avatarUrl} name={name}>
+    <Dialog />
+
+    <section class="sample-content">
+        <h2>Load from album</h2>
+        <p class="subhead mdl-color-text--grey-700">
+            Load photos into your photo frame from your Google Photos albums.
+        </p>
+        <ul class="mdl-list" id="albums"></ul>
+    </section>
+
+    <!-- partial/js -->
+    <script src={jQuery} is:inline></script>
+    <script src="/js/common.js" is:inline></script>
+    <!-- partial/js -->
+    <script src="/js/album.js" is:inline></script>
+</Layout>

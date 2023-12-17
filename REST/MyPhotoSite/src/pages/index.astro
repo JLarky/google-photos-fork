@@ -1,0 +1,69 @@
+---
+import Layout from "../ui/Layout.astro";
+import Dialog from "../ui/Dialog.astro";
+import jQuery from "jquery/dist/jquery.min.js?url";
+import fancybox from "@fancyapps/fancybox/dist/jquery.fancybox.min.js?url";
+
+
+export const prerender = false;
+
+let name = "-";
+let avatarUrl = "";
+
+// res.locals.name = '-';
+//   if (req.user && req.user.profile && req.user.profile.name) {
+//     res.locals.name =
+//         req.user.profile.name.givenName || req.user.profile.displayName;
+//   }
+
+//   res.locals.avatarUrl = '';
+//   if (req.user && req.user.profile && req.user.profile.photos) {
+//     res.locals.avatarUrl = req.user.profile.photos[0].value;
+//   }
+
+
+---
+<Layout avatarUrl={avatarUrl} name={name}>
+    <section class="sample-content">
+        <div>
+            <h2>Photo frame preview</h2>
+            <p class="subhead mdl-color-text--grey-700">
+                Welcome to the photo frame sample. Select an option above to
+                load images from your Google Photos library.
+                <br />Select a photo or use the "View in frame" button to start
+                your photo frame experience!
+            </p>
+        </div>
+        <div>
+            <p id="preview-description" style="display: none;">
+                <div class="snippet">
+                    <span id="images-count">0</span> images loaded from
+                    <pre id="images-source">-</pre>
+                </div>
+            </p>
+        </div>
+        <div id="images-container"></div>
+        <div id="images_empty" style="display:none">
+            <img src="/imgs/null-results.png" />
+            <p>No results, try searching again</p>
+        </div>
+    </section>
+
+    <div class="floating-button">
+        <button
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+            id="startSlideshow"
+        >
+            <i class="material-icons">fullscreen</i>
+            <span class="float-btn-label">View in frame</span>
+        </button>
+    </div>
+
+    <Dialog />
+    <!-- partial/js -->
+    <script src={jQuery} is:inline></script>
+    <script src="/js/common.js" is:inline></script>
+    <!-- partial/js -->
+    <script src={fancybox} is:inline></script>
+    <script src="/js/frame.js" is:inline></script>
+</Layout>
